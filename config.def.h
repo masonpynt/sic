@@ -1,8 +1,8 @@
 /* Host used when "-h" is not given */
-#define DEFAULT_HOST "irc.oftc.net"
+#define DEFAULT_HOST "irc.inthemansion.com"
 
 /* Port used when "-p" is not given */
-#define DEFAULT_PORT "6667"
+#define DEFAULT_PORT "6697"
 
 /* Timestamp format; see strftime(3). */
 #define TIMESTAMP_FORMAT "%Y-%m-%d %R"
@@ -12,3 +12,8 @@
 
 /* Parting message used when none is specified with ":l ..." command. */
 #define DEFAULT_PARTING_MESSAGE "sic - 250 LOC are too much!"
+
+/* Default nick */
+#define DEFAULT_NICK "bregodez"
+
+

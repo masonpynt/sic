@@ -103,6 +103,12 @@ parsein(char *s) {
 		case 's':
 			strlcpy(channel, p, sizeof channel);
 			return;
+    case 'q':
+      s = eat(p, isspace, 1);
+      if(!*s)
+        s = DEFAULT_PARTING_MESSAGE;
+      sout("QUIT :%s", s);
+      return;
 		}
 	}
 	sout("%s", s);
@@ -152,7 +158,7 @@ main(int argc, char *argv[]) {
 	int n;
 	fd_set rd;
 
-	strlcpy(nick, user ? user : "unknown", sizeof nick);
+	strlcpy(nick, DEFAULT_NICK, sizeof nick);
 	ARGBEGIN {
 	case 'h':
 		host = EARGF(usage());
