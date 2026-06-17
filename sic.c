@@ -77,6 +77,10 @@ parsein(char *s) {
 	if(c != '\0' && isspace((unsigned char)s[1])) {
 		p = s + 2;
 		switch(c) {
+		case 'a':
+			pout(channel, "* %s %s", nick, p);
+			sout("PRIVMSG %s :\001ACTION %s\001", channel, p);
+			return;
 		case 'j':
 			sout("JOIN %s", p);
 			if(channel[0] == '\0')
@@ -135,7 +139,12 @@ parsesrv(char *cmd) {
 	if(!strcmp("PONG", cmd))
 		return;
 	if(!strcmp("PRIVMSG", cmd))
-		pout(par, "<%s> %s", usr, txt);
+		if (!strncmp(txt, "\001ACTION", 7)) {
+		txt += 8;
+		pout(par, "* %s %s", usr, txt);
+		} else {
+	 	pout(par, "<%s> %s", usr, txt);
+		}
 	else if(!strcmp("PING", cmd))
 		sout("PONG %s", txt);
 	else {
